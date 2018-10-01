@@ -1,5 +1,6 @@
 package org.ayannah.jcc.doyouknowit.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,11 +36,12 @@ public class ListCategories extends AppCompatActivity {
     RecyclerView myRecyclerView;
     RecyclerView.Adapter customAdapter;
     List<Categories> dataSource = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_categories);
+
+
         myRecyclerView = (RecyclerView) findViewById(R.id.rv_container);
         myRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
         customAdapter = new CategoriesAdapter(dataSource, R.layout.item_layout, getApplicationContext());
@@ -47,7 +52,8 @@ public class ListCategories extends AppCompatActivity {
     public void loadData(){
         CategoriesAPI categoriesService =
                 NetworkClient.buildConnection(CategoriesAPI.class);
-        Call<List<Categories>> call = categoriesService.getCategories(10);
+        final Call<List<Categories>> call = categoriesService.getCategories(10);
+        final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         call.enqueue(new Callback<List<Categories>>() {
             @Override
             public void onResponse(Call<List<Categories>> call, Response<List<Categories>> response) {
@@ -55,10 +61,11 @@ public class ListCategories extends AppCompatActivity {
                     dataSource.clear();
                     dataSource.addAll(response.body());
                     customAdapter.notifyDataSetChanged();
+
                 }else{
                     Toast.makeText(ctx,"Failed to retrieve items",Toast.LENGTH_SHORT).show();
                 }
-
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
@@ -68,6 +75,7 @@ public class ListCategories extends AppCompatActivity {
                 }else{
                     Toast.makeText(ctx,"Failed to retrieve items",Toast.LENGTH_SHORT).show();
                 }
+                progressBar.setVisibility(View.GONE);
             }
         });
     }
