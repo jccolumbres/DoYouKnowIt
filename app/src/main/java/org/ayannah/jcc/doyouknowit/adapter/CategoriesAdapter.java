@@ -2,6 +2,7 @@ package org.ayannah.jcc.doyouknowit.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +15,12 @@ import org.ayannah.jcc.doyouknowit.models.Categories;
 
 import java.util.List;
 
-public class CatergoriesAdapter extends RecyclerView.Adapter<CatergoriesAdapter.CategoriesViewHolder>{
+public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.CategoriesViewHolder>{
     private List<Categories> categories;
     private int rowLayout;
     private Context ctx;
 
-    public CatergoriesAdapter(List<Categories> categories, int rowLayout, Context ctx) {
+    public CategoriesAdapter(List<Categories> categories, int rowLayout, Context ctx) {
         this.setCategories(categories);
         this.setRowLayout(rowLayout);
         this.setCtx(ctx);
@@ -70,12 +71,12 @@ public class CatergoriesAdapter extends RecyclerView.Adapter<CatergoriesAdapter.
     }
 
     public static class CategoriesViewHolder extends RecyclerView.ViewHolder {
-        LinearLayout linearLayout;
+        CardView cardView;
         TextView categoryName;
 
         public CategoriesViewHolder(View v){
             super(v);
-            linearLayout = (LinearLayout) v.findViewById(R.id.ll_main);
+            cardView = (CardView) v.findViewById(R.id.card_view);
             categoryName = (TextView)v.findViewById(R.id.tvCategoryName);
         }
 
