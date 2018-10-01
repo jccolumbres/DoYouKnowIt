@@ -3,9 +3,13 @@ package org.ayannah.jcc.doyouknowit.activity;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.ayannah.jcc.doyouknowit.R;
@@ -28,13 +32,13 @@ public class ListCategories extends AppCompatActivity {
     RecyclerView myRecyclerView;
     RecyclerView.Adapter customAdapter;
     List<Categories> dataSource = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_categories);
-
         myRecyclerView = (RecyclerView) findViewById(R.id.rv_container);
-        myRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        myRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
         customAdapter = new CategoriesAdapter(dataSource, R.layout.item_layout, getApplicationContext());
         myRecyclerView.setAdapter(customAdapter);
         loadData();
@@ -68,3 +72,4 @@ public class ListCategories extends AppCompatActivity {
         });
     }
 }
+

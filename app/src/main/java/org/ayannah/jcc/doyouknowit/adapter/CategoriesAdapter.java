@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.ayannah.jcc.doyouknowit.R;
 import org.ayannah.jcc.doyouknowit.models.Categories;
@@ -62,6 +63,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
     @Override
     public void onBindViewHolder(@NonNull CategoriesViewHolder holder, int i) {
+        holder.categoryId.setText(categories.get(i).getId());
         holder.categoryName.setText(categories.get(i).getTitle());
     }
 
@@ -70,16 +72,22 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         return categories.size();
     }
 
-    public static class CategoriesViewHolder extends RecyclerView.ViewHolder {
+    public static class CategoriesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         CardView cardView;
-        TextView categoryName;
+        TextView categoryName,categoryId;
 
         public CategoriesViewHolder(View v){
             super(v);
             cardView = (CardView) v.findViewById(R.id.card_view);
+            cardView.setOnClickListener(this);
             categoryName = (TextView)v.findViewById(R.id.tvCategoryName);
+            categoryId = (TextView)v.findViewById(R.id.tvCategoryId);
         }
 
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(v.getContext(), categoryId.getText().toString(),Toast.LENGTH_SHORT ).show();
+        }
     }
 }
 
