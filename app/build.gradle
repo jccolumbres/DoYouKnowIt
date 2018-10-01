@@ -29,4 +29,7 @@ dependencies {
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_ver"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_ver"
+
+    //OkHttp
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_ver"
 }
