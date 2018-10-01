@@ -12,4 +12,5 @@ public interface CategoriesAPI {
     @GET("/api/categories/?count={value}")
     Call<Categories> getCategories (@Path("value") String value);
 
+
 }
