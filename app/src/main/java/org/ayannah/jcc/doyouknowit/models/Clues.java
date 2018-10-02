@@ -3,6 +3,7 @@ package org.ayannah.jcc.doyouknowit.models;
 import com.google.gson.annotations.SerializedName;
 
 public class Clues {
+
     @SerializedName("id")
     private String id;
 

@@ -1,8 +1,16 @@
 package org.ayannah.jcc.doyouknowit.models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Categories {
+
+    @SerializedName("id")
     private String id;
+
+    @SerializedName("title")
     private String title;
+
+    @SerializedName("count")
     private int count;
 
     public Categories(String id, String title, int count) {
@@ -11,13 +19,6 @@ public class Categories {
         this.setCount(count);
     }
 
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
-//    }
 
     public String getTitle() {
         return title;

@@ -1,8 +1,16 @@
 package org.ayannah.jcc.doyouknowit.models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Category {
+
+    @SerializedName("id")
     private String id;
+
+    @SerializedName("title")
     private String title;
+
+    @SerializedName("clues")
     private Clues clues;
 
     public Category(String id, String title, Clues clues) {
