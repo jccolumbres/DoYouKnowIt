@@ -90,9 +90,9 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
         @Override
         public void onClick(View v) {
-//            Toast.makeText(v.getContext(), categoryId.getText().toString(),Toast.LENGTH_SHORT ).show();
             Intent i = new Intent(v.getContext(),ListQuestions.class);
             i.putExtra("id",categoryId.getText().toString());
+            i.putExtra("CategoryName", categoryName.getText().toString());
             v.getContext().startActivity(i);
         }
     }
