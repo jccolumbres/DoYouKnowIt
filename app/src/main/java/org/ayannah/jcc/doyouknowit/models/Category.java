@@ -2,44 +2,24 @@ package org.ayannah.jcc.doyouknowit.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class Category {
 
-    @SerializedName("id")
-    private String id;
-
-    @SerializedName("title")
-    private String title;
 
     @SerializedName("clues")
-    private Clues clues;
+    private List<Clues> clues;
 
-    public Category(String id, String title, Clues clues) {
-        this.setId(id);
-        this.setTitle(title);
+
+    public Category(List<Clues> clues) {
         this.setClues(clues);
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Clues getClues() {
+    public List<Clues> getClues() {
         return clues;
     }
 
-    public void setClues(Clues clues) {
+    public void setClues(List<Clues> clues) {
         this.clues = clues;
     }
 }

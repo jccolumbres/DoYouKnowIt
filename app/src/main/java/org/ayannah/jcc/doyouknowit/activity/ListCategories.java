@@ -1,19 +1,12 @@
 package org.ayannah.jcc.doyouknowit.activity;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.ayannah.jcc.doyouknowit.R;
@@ -44,7 +37,7 @@ public class ListCategories extends AppCompatActivity {
 
         myRecyclerView = (RecyclerView) findViewById(R.id.rv_container);
         myRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
-        customAdapter = new CategoriesAdapter(dataSource, R.layout.item_layout, getApplicationContext());
+        customAdapter = new CategoriesAdapter(dataSource, R.layout.item_layout_categories, getApplicationContext());
         myRecyclerView.setAdapter(customAdapter);
         loadData();
     }
@@ -52,7 +45,7 @@ public class ListCategories extends AppCompatActivity {
     public void loadData(){
         CategoriesAPI categoriesService =
                 NetworkClient.buildConnection(CategoriesAPI.class);
-        final Call<List<Categories>> call = categoriesService.getCategories(10);
+        final Call<List<Categories>> call = categoriesService.getCategories(20);
         final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         call.enqueue(new Callback<List<Categories>>() {
             @Override
