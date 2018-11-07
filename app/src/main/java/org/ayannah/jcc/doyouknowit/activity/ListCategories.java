@@ -68,15 +68,7 @@ public class ListCategories extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     dataSource.clear();
                     dataSource.addAll(response.body());
-                    long count = mDataSourceOffline.getDBItems();
-                    if (count == 0) {
-                        for (Categories category : dataSource) {
-                            mDataSourceOffline.createCategory(category);
-                            Log.i("XHITE","Category inserted: " + category.getTitle());
-                        }
-                    }else{
-                        Toast.makeText(ListCategories.this, "Data already saved", Toast.LENGTH_SHORT).show();
-                    }
+                    mDataSourceOffline.populateDB(dataSource);
                     customAdapter.notifyDataSetChanged();
                 } else {
                     Toast.makeText(ctx, "Failed to retrieve items", Toast.LENGTH_SHORT).show();
@@ -87,7 +79,11 @@ public class ListCategories extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Categories>> call, Throwable t) {
                 if (t instanceof IOException) {
-                    Toast.makeText(ctx, "Connection error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ctx, "Connection error using Offline data instead", Toast.LENGTH_SHORT).show();
+                    List<Categories> categoriesList = mDataSourceOffline.getDBItemsList();
+                    customAdapter = new CategoriesAdapter(categoriesList, R.layout.item_layout_categories, getApplicationContext());
+                    myRecyclerView.setAdapter(customAdapter);
+                    customAdapter.notifyDataSetChanged();
                 } else {
                     Toast.makeText(ctx, "Failed to retrieve items", Toast.LENGTH_SHORT).show();
                 }
